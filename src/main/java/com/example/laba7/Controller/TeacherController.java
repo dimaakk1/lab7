@@ -32,4 +32,9 @@ public class TeacherController {
         model.addAttribute("courses", courseRepository.findAll());
         return "layout/courses";
     }
+
+    @GetMapping("/register")
+    public String showRegisterForm() {
+        return "layout/register";
+    }
 }
