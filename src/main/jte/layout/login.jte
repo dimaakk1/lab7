@@ -1,6 +1,4 @@
 @param boolean error
-@param org.springframework.security.web.csrf.CsrfToken _csrf
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,7 +84,7 @@
         <input type="password" id="password" name="password" required />
     </div>
 
-    <input type="hidden" name="${_csrf.getParameterName()}" value="${_csrf.getToken()}" />
+
 
     <div>
         <button type="submit">Login</button>

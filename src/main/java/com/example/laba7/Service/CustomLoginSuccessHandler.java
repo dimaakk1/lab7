@@ -16,6 +16,6 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
                                         HttpServletResponse response,
                                         Authentication authentication)
             throws ServletException, IOException {
-        response.sendRedirect("/courses");
+        response.sendRedirect("/index");
     }
 }

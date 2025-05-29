@@ -22,6 +22,12 @@ public class TeacherController {
         this.teacherRepository = teacherRepository;
         this.courseRepository = courseRepository;
     }
+
+    @GetMapping("/index")
+    public String index() {
+        return "layout/index";
+    }
+
     @GetMapping("/teachers")
     public String getAllTeachers(Model model) {
         Iterable<Teacher> teachers = teacherRepository.findAll();
@@ -37,15 +43,16 @@ public class TeacherController {
     }
 
     @GetMapping("/register")
-    public String showRegisterForm() {
+    public String showRegisterForm(Model model, HttpServletRequest request,
+                                   @RequestParam(value = "error", required = false) String error) {
+        CsrfToken csrfToken = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+        model.addAttribute("_csrf", csrfToken);
         return "layout/register";
     }
 
     @GetMapping("/login")
-    public String loginPage(Model model, HttpServletRequest request,
+    public String loginPage(Model model,
                             @RequestParam(value = "error", required = false) String error) {
-        CsrfToken csrfToken = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
-        model.addAttribute("_csrf", csrfToken);
         model.addAttribute("error", error != null);
         return "layout/login";
     }
