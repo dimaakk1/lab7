@@ -36,4 +36,28 @@ public class CourseController {
         courseRepo.save(course);
         return "redirect:/courses";
     }
+
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable long id, Model model) {
+        Course course = courseRepo.findById(id).orElseThrow();
+        Iterable<Teacher> teachers = teacherRepo.findAll();
+        model.addAttribute("course", course);
+        model.addAttribute("teachers", teachers);
+        return "layout/edit-course";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String updateCourse(@PathVariable long id,
+                               @RequestParam String title,
+                               @RequestParam Integer teacherId) {
+        Course course = courseRepo.findById(id).orElseThrow();
+        Teacher teacher = teacherRepo.findById(teacherId).orElseThrow();
+
+        course.setTitle(title);
+        course.setTeacher(teacher);
+
+        courseRepo.save(course);
+        return "redirect:/courses";
+    }
+
 }

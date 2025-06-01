@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class TeacherController {
+public class Controllers {
 
     private final TeacherRepository teacherRepository;
     private final CourseRepository courseRepository;
 
     @Autowired
-    public TeacherController(TeacherRepository teacherRepository, CourseRepository courseRepository) {
+    public Controllers(TeacherRepository teacherRepository, CourseRepository courseRepository) {
         this.teacherRepository = teacherRepository;
         this.courseRepository = courseRepository;
     }

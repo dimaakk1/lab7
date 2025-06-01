@@ -55,6 +55,7 @@
         <th>ID</th>
         <th>Title</th>
         <th>Teacher</th>
+        <th>Edit</th>
     </tr>
     </thead>
     <tbody>
@@ -63,6 +64,9 @@
             <td>${course.getId()}</td>
             <td>${course.getTitle()}</td>
             <td>${course.getTeacher().getName()}</td>
+            <td>
+                <a href="/courses/edit/${course.getId()}">Edit</a>
+            </td>
         </tr>
     @endfor
     </tbody>

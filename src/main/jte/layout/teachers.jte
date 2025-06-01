@@ -20,10 +20,10 @@
             margin-bottom: 30px;
         }
         table {
-            width: 60%;
+            width: 80%;
             margin: 0 auto;
             border-collapse: collapse;
-            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
             background: white;
             border-radius: 8px;
             overflow: hidden;
@@ -33,17 +33,17 @@
             text-align: left;
         }
         thead {
-            background-color: #27ae60;
+            background-color: #2980b9;
             color: white;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
         tbody tr:nth-child(even) {
-            background-color: #eafaf1;
+            background-color: #f2f6fc;
         }
         tbody tr:hover {
-            background-color: #c9f2d3;
+            background-color: #d0e4ff;
         }
     </style>
 </head>
