@@ -56,6 +56,7 @@
         <th>Title</th>
         <th>Teacher</th>
         <th>Edit</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -67,9 +68,24 @@
             <td>
                 <a href="/courses/edit/${course.getId()}">Edit</a>
             </td>
+            <td>
+                <button onclick="confirmDelete(${course.getId()})">Видалити</button>
+
+                <form id="delete-form-${course.getId()}" action="/courses/delete" method="post" style="display: none;">
+                    <input type="hidden" name="id" value="${course.getId()}">
+                </form>
+            </td>
+
         </tr>
     @endfor
     </tbody>
 </table>
+<script>
+    function confirmDelete(courseId) {
+        if (confirm("Ви впевнені, що хочете видалити цей курс?")) {
+            document.getElementById('delete-form-' + courseId).submit();
+        }
+    }
+</script>
 </body>
 </html>

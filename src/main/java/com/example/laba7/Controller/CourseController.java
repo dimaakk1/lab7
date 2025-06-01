@@ -60,4 +60,9 @@ public class CourseController {
         return "redirect:/courses";
     }
 
+    @PostMapping("/delete")
+    public String deleteCourse(@RequestParam long id) {
+        courseRepo.deleteById(id);
+        return "redirect:/courses";
+    }
 }
