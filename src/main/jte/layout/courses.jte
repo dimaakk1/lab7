@@ -1,6 +1,7 @@
 @import com.example.laba7.Entity.Course
 @import java.util.List
 @param List<Course> courses
+@param String sortDirection
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,6 +50,12 @@
 </head>
 <body>
 <h1>Courses List</h1>
+<div style="text-align:center; margin-bottom: 20px;">
+    <a href="/courses?sort=${sortDirection.equals("asc") ? "desc" : "asc"}">
+        Сортувати за назвою (${sortDirection.equals("asc") ? " спаданням" : " зростанням"})
+    </a>
+</div>
+
 <table>
     <thead>
     <tr>

@@ -88,7 +88,7 @@
         </select>
 
         <button type="submit">Додати курс</button>
-        <a href="/">На головну</a>
+        <a href="/index">На головну</a>
     </form>
 </div>
 </body>

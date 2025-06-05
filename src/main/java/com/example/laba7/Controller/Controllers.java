@@ -1,5 +1,6 @@
 package com.example.laba7.Controller;
 
+import com.example.laba7.Entity.Course;
 import com.example.laba7.Entity.Teacher;
 import com.example.laba7.Repository.TeacherRepository;
 import com.example.laba7.Repository.CourseRepository;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class Controllers {
@@ -37,8 +40,21 @@ public class Controllers {
     }
 
     @GetMapping("/courses")
-    public String coursesList(Model model) {
-        model.addAttribute("courses", courseRepository.findAll());
+    public String coursesList(
+            @RequestParam(defaultValue = "asc") String sort,
+            Model model) {
+
+        List<Course> courses;
+
+        if (sort.equalsIgnoreCase("desc")) {
+            courses = courseRepository.findAllByOrderByTitleDesc();
+        } else {
+            courses = courseRepository.findAllByOrderByTitleAsc();
+        }
+
+        model.addAttribute("courses", courses);
+        model.addAttribute("sortDirection", sort);
+
         return "layout/courses";
     }
 

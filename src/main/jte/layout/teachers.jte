@@ -65,5 +65,6 @@
     @endfor
     </tbody>
 </table>
+
 </body>
 </html>
