@@ -39,8 +39,8 @@ public class Controllers {
         return "layout/teachers";
     }
 
-    @GetMapping("/courses")
-    public String coursesList(
+    /*@GetMapping("/courses")
+    public String coursesList(@RequestParam(required = false) String keyword,
             @RequestParam(defaultValue = "asc") String sort,
             Model model) {
 
@@ -52,6 +52,43 @@ public class Controllers {
             courses = courseRepository.findAllByOrderByTitleAsc();
         }
 
+        if (keyword != null && !keyword.isEmpty()) {
+            courses = courseRepository.findByTitleContainingIgnoreCase(keyword);
+        } else {
+            courses = courseRepository.findAllByOrderByTitleDesc();
+        }
+
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("courses", courses);
+        model.addAttribute("sortDirection", sort);
+
+        return "layout/courses";
+    }*/
+
+    @GetMapping("/courses")
+    public String coursesList(@RequestParam(required = false) String keyword,
+                              @RequestParam(defaultValue = "asc") String sort,
+                              Model model) {
+
+        List<Course> courses;
+
+        if (keyword != null && !keyword.isEmpty()) {
+            // Пошук + сортування
+            if (sort.equalsIgnoreCase("desc")) {
+                courses = courseRepository.findByTitleContainingIgnoreCaseOrderByTitleDesc(keyword);
+            } else {
+                courses = courseRepository.findByTitleContainingIgnoreCaseOrderByTitleAsc(keyword);
+            }
+        } else {
+            // Лише сортування
+            if (sort.equalsIgnoreCase("desc")) {
+                courses = courseRepository.findAllByOrderByTitleDesc();
+            } else {
+                courses = courseRepository.findAllByOrderByTitleAsc();
+            }
+        }
+
+        model.addAttribute("keyword", keyword);
         model.addAttribute("courses", courses);
         model.addAttribute("sortDirection", sort);
 

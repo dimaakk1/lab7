@@ -2,6 +2,7 @@
 @import java.util.List
 @param List<Course> courses
 @param String sortDirection
+@param String keyword
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,14 +47,71 @@
         tbody tr:hover {
             background-color: #d0e4ff;
         }
+        .controls {
+            width: 80%;
+            margin: 0 auto 20px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .sort-link {
+            background-color: #2980b9;
+            color: white;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            user-select: none;
+        }
+        .sort-link:hover {
+            background-color: #1f6391;
+        }
+        form.search-form {
+            display: flex;
+            gap: 10px;
+        }
+        form.search-form input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1em;
+            width: 250px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            transition: border-color 0.3s ease;
+        }
+        form.search-form input[type="text"]:focus {
+            border-color: #2980b9;
+            outline: none;
+        }
+        form.search-form button {
+            padding: 10px 20px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            user-select: none;
+        }
+        form.search-form button:hover {
+            background-color: #1f6391;
+        }
     </style>
 </head>
 <body>
 <h1>Courses List</h1>
-<div style="text-align:center; margin-bottom: 20px;">
-    <a href="/courses?sort=${sortDirection.equals("asc") ? "desc" : "asc"}">
+<div class="controls">
+    <a class="sort-link" href="/courses?sort=${sortDirection.equals("asc") ? "desc" : "asc"}${keyword != null && !keyword.isEmpty() ? "&keyword=" + keyword : ""}">
         Сортувати за назвою (${sortDirection.equals("asc") ? " спаданням" : " зростанням"})
     </a>
+
+    <form class="search-form" method="get" action="/courses">
+        <input type="text" name="keyword" placeholder="Пошук за назвою" value="${keyword != null ? keyword : ""}" />
+        <input type="hidden" name="sort" value="${sortDirection != null ? sortDirection : "asc"}" />
+        <button type="submit">Шукати</button>
+    </form>
 </div>
 
 <table>
